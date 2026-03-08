@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Olivery | Zona Sur — Entrega a domicilio sin cargo</title>
+<meta name="description" content="Aceites de oliva premium con entrega a domicilio sin cargo en Barrio Parque Vélez Sarsfield, Colinas, Residencial y Altos de Vélez Sarsfield."/>
+<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+<style>
+/* ── Reset & Variables (reused from main site) ── */
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root {
+  --primary: #1e3a24;
+  --primary-light: #345c38;
+  --secondary: #909d43;
+  --accent: #d4af37;
+  --accent-light: #e8c96b;
+  --white: #ffffff;
+  --cream: #f4efe9;
+  --cream-dark: #e8e2d8;
+  --text: #172418;
+  --text-muted: #4e5c4f;
+  --text-light: #839184;
+  --heading: #122115;
+  --card-bg: rgba(255, 255, 255, 0.65);
+  --container-max: 1300px;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --shadow-sm: 4px 4px 16px rgba(30,58,36,0.1), -4px -4px 16px rgba(255,255,255,0.8);
+  --shadow-md: 6px 6px 24px rgba(30,58,36,0.12), -6px -6px 24px rgba(255,255,255,0.9);
+  --shadow-lg: 10px 10px 32px rgba(30,58,36,0.15), -10px -10px 32px rgba(255,255,255,1);
+  --shadow-xl: 16px 16px 48px rgba(30,58,36,0.2), -10px -10px 48px rgba(255,255,255,0.9);
+  --border: rgba(30,58,36,0.08);
+  --transition-fast: all 0.2s cubic-bezier(0.4,0,0.2,1);
+  --transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+
+body.dark-theme {
+  --primary:#9dc5a3;--primary-light:#b9dcb9;--secondary:#b2c262;--accent:#e5cc80;--accent-light:#f7e6a7;
+  --cream:#141a15;--cream-dark:#1b241d;--text:#e1e9e2;--text-muted:#a6b5a8;--text-light:#778a7a;
+  --heading:#e5cc80;--card-bg:rgba(30,42,33,0.7);--border:rgba(255,255,255,0.06);
+  --shadow-sm:4px 4px 16px rgba(0,0,0,0.5),-2px -2px 8px rgba(255,255,255,0.05);
+  --shadow-md:6px 6px 24px rgba(0,0,0,0.6),-3px -3px 12px rgba(255,255,255,0.04);
+  --shadow-lg:10px 10px 32px rgba(0,0,0,0.7),-4px -4px 16px rgba(255,255,255,0.03);
+  --shadow-xl:16px 16px 48px rgba(0,0,0,0.8),-5px -5px 20px rgba(255,255,255,0.02);
+}
+
+html{scroll-behavior:smooth}
+
+body {
+  font-family:"Outfit",sans-serif;
+  line-height:1.7;
+  color:var(--text);
+  background-color:var(--cream);
+  overflow-x:hidden;
+  transition:background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Noise overlay */
+.noise-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.4;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opactity='0.8'/%3E%3C/svg%3E");mix-blend-mode:multiply}
+body.dark-theme .noise-overlay{opacity:0.15;mix-blend-mode:overlay}
+
+body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 20% 0%,rgba(139,154,70,0.08) 0%,transparent 50%),radial-gradient(ellipse at 80% 100%,rgba(200,161,107,0.06) 0%,transparent 50%);z-index:-1;pointer-events:none}
+body.dark-theme::before{background:radial-gradient(ellipse at 20% 0%,rgba(143,188,143,0.05) 0%,transparent 50%),radial-gradient(ellipse at 80% 100%,rgba(212,165,116,0.04) 0%,transparent 50%)}
+
+.container{max-width:var(--container-max);margin:0 auto;padding:0 clamp(20px,5vw,60px)}
+
+/* ── Header ── */
+.zs-header{
+  position:sticky;top:0;z-index:2000;
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  box-shadow:var(--shadow-sm);
+  border-bottom:1px solid var(--border);
+  padding:0 clamp(20px,5vw,60px);
+  height:65px;display:flex;align-items:center;justify-content:space-between;
+}
+body.dark-theme .zs-header{background:rgba(13,13,13,0.85)}
+
+.zs-header-logo{
+  font-family:"Cormorant Garamond",serif;font-size:1.75rem;color:var(--primary);
+  font-weight:700;text-decoration:none;letter-spacing:-0.02em;transition:var(--transition-fast);
+}
+.zs-header-logo:hover{color:var(--primary-light);transform:translateY(-1px)}
+
+.zs-header-actions{display:flex;align-items:center;gap:10px}
+
+.zs-back-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:10px 18px;border-radius:100px;
+  background:rgba(26,58,26,0.04);border:1px solid var(--border);
+  color:var(--text);font-family:inherit;font-weight:600;font-size:0.7rem;
+  letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;
+  text-decoration:none;transition:var(--transition-fast);
+}
+.zs-back-btn:hover{background:rgba(26,58,26,0.08);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+body.dark-theme .zs-back-btn{background:rgba(255,255,255,0.05)}
+body.dark-theme .zs-back-btn:hover{background:rgba(255,255,255,0.08)}
+
+.theme-button{
+  background:rgba(26,58,26,0.04);border:1px solid var(--border);padding:10px 18px;
+  border-radius:100px;display:flex;align-items:center;gap:10px;cursor:pointer;
+  color:var(--text);transition:var(--transition-fast);font-family:inherit;
+}
+.theme-button:hover{background:rgba(26,58,26,0.08);transform:translateY(-2px)}
+body.dark-theme .theme-button{background:rgba(255,255,255,0.05)}
+body.dark-theme .theme-button:hover{background:rgba(255,255,255,0.08)}
+.theme-text{font-weight:600;font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase}
+.theme-icon-wrapper{width:18px;height:18px;position:relative}
+.sun-icon,.moon-icon{width:100%;height:100%;position:absolute;top:0;left:0;transition:var(--transition)}
+.moon-icon{opacity:0;transform:rotate(-90deg) scale(0)}
+body.dark-theme .sun-icon{opacity:0;transform:rotate(90deg) scale(0)}
+body.dark-theme .moon-icon{opacity:1;transform:rotate(0) scale(1);color:var(--accent)}
+
+/* ── Hero Banner ── */
+.zs-hero{
+  text-align:center;padding:80px 20px 50px;position:relative;
+}
+.zs-hero::before{
+  content:"";position:absolute;top:0;left:0;width:100%;height:100%;
+  background:radial-gradient(ellipse at center,rgba(183,28,28,0.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+
+.zs-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 20px;border-radius:100px;
+  background:linear-gradient(135deg, #c0392b 0%, #e74c3c 50%, #b71c1c 100%);
+  color:#fff;font-weight:700;font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;
+  margin-bottom:24px;
+  box-shadow:0 4px 14px rgba(183,28,28,0.35);
+}
+
+.zs-hero h1{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(2rem,6vw,3.5rem);
+  color:var(--heading);margin-bottom:20px;font-weight:700;letter-spacing:-0.03em;line-height:1.15;
+}
+
+.zs-hero .zs-subtitle{
+  max-width:720px;margin:0 auto 20px;color:var(--text-muted);
+  font-size:clamp(0.95rem,1.3vw,1.05rem);line-height:1.85;text-wrap:balance;
+}
+
+/* ── Delivery Info Card ── */
+.zs-info-card{
+  max-width:700px;margin:0 auto 60px;
+  background:var(--card-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.4);border-radius:var(--radius-lg);
+  padding:36px 40px;box-shadow:var(--shadow-md);text-align:left;
+}
+body.dark-theme .zs-info-card{border-color:rgba(255,255,255,0.08)}
+
+.zs-info-card h3{
+  font-family:"Cormorant Garamond",serif;font-size:1.4rem;color:var(--heading);
+  margin-bottom:16px;font-weight:600;
+}
+
+.zs-info-card p{
+  color:var(--text-muted);font-size:0.95rem;line-height:1.8;margin-bottom:12px;
+}
+.zs-info-card p:last-child{margin-bottom:0}
+
+.zs-barrios{
+  font-weight:600;color:var(--primary);
+}
+
+.zs-horarios{
+  background:rgba(30,58,36,0.04);border-radius:var(--radius-sm);padding:16px 20px;margin-top:8px;
+}
+body.dark-theme .zs-horarios{background:rgba(255,255,255,0.04)}
+
+.zs-horarios strong{color:var(--primary);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.04em}
+
+/* ── Products Grid ── */
+.zs-products{padding:0 0 80px;position:relative}
+
+.zs-section-title{
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(1.8rem,4vw,2.6rem);
+  color:var(--heading);text-align:center;margin-bottom:48px;font-weight:700;letter-spacing:-0.02em;
+}
+
+.zs-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:32px;
+  max-width:900px;
+  margin:0 auto;
+}
+
+@media(max-width:700px){
+  .zs-grid{grid-template-columns:1fr;max-width:420px}
+}
+
+/* ── Product Card (replicates main site) ── */
+.zs-card{
+  background:var(--card-bg);border-radius:var(--radius-lg);padding:0;overflow:hidden;
+  box-shadow:var(--shadow-sm);transition:var(--transition);cursor:pointer;
+  position:relative;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.4);
+}
+body.dark-theme .zs-card{border:1px solid rgba(255,255,255,0.08)}
+
+.zs-card::before{
+  content:"";position:absolute;top:0;left:0;width:100%;height:100%;
+  border-radius:var(--radius-lg);pointer-events:none;z-index:2;
+  background:linear-gradient(135deg,rgba(255,255,255,0.4) 0%,rgba(255,255,255,0) 100%);opacity:0.5;
+  transition:var(--transition);
+}
+body.dark-theme .zs-card::before{background:linear-gradient(135deg,rgba(255,255,255,0.1) 0%,rgba(255,255,255,0) 100%)}
+
+.zs-card:hover{
+  transform:translateY(-12px);
+  box-shadow:var(--shadow-lg),0 20px 40px rgba(212,175,55,0.1);
+  border-color:rgba(212,175,55,0.5);
+}
+
+.zs-card-img-wrap{
+  height:260px;position:relative;overflow:hidden;
+  background:linear-gradient(180deg,rgba(26,58,26,0.02) 0%,rgba(26,58,26,0.05) 100%);
+}
+
+.zs-card-img{
+  width:100%;height:100%;object-fit:contain;padding:15px;
+  background:linear-gradient(180deg,rgba(244,239,233,0.5),rgba(232,226,216,0.5));
+  transition:transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+body.dark-theme .zs-card-img{background:linear-gradient(180deg,rgba(30,42,33,0.5),rgba(27,36,29,0.5))}
+.zs-card:hover .zs-card-img{transform:scale(1.08)}
+
+.zs-card-overlay{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background:linear-gradient(180deg,transparent 0%,rgba(26,58,26,0.7) 100%);
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:30px;
+  opacity:0;transition:var(--transition);
+}
+.zs-card:hover .zs-card-overlay{opacity:1}
+
+.zs-view-more{
+  padding:12px 28px;background:rgba(255,255,255,0.9);color:var(--primary);
+  border-radius:100px;font-weight:700;text-transform:uppercase;font-size:0.75rem;
+  letter-spacing:0.1em;transform:translateY(20px);transition:var(--transition);
+  box-shadow:0 8px 24px rgba(0,0,0,0.15),inset 0 2px 4px rgba(255,255,255,1);
+  border:1px solid rgba(255,255,255,0.4);
+}
+.zs-card:hover .zs-view-more{
+  transform:translateY(0);background:white;
+  box-shadow:0 12px 32px rgba(212,175,55,0.2),inset 0 2px 4px rgba(255,255,255,1);
+  color:#1a3a1a;
+}
+
+.zs-card-info{padding:24px 28px;position:relative;z-index:3}
+
+.zs-card-info h3{
+  font-family:"Cormorant Garamond",serif;font-size:1.2rem;margin-bottom:6px;
+  color:var(--text);line-height:1.3;letter-spacing:-0.01em;
+}
+body.dark-theme .zs-card-info h3{color:var(--text)}
+
+.zs-card-price{
+  font-size:1.3rem;font-weight:700;color:var(--primary);letter-spacing:-0.02em;margin-bottom:0;
+}
+body.dark-theme .zs-card-price{color:#e8c96b}
+
+.zs-buy-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
+  margin-top:16px;padding:14px;
+  background:linear-gradient(135deg,#25d366 0%,#128c7e 100%);
+  color:white;border:1px solid rgba(255,255,255,0.2);border-radius:var(--radius-md);
+  font-weight:700;font-size:0.85rem;letter-spacing:0.05em;cursor:pointer;
+  transition:var(--transition-fast);position:relative;z-index:3;
+  box-shadow:0 4px 12px rgba(37,211,102,0.2),inset 0 2px 4px rgba(255,255,255,0.4);
+  font-family:inherit;
+}
+.zs-buy-btn:hover{
+  background:linear-gradient(135deg,#20bd5a 0%,#075e54 100%);
+  transform:translateY(-2px);
+  box-shadow:0 6px 16px rgba(37,211,102,0.3),inset 0 2px 4px rgba(255,255,255,0.5);
+}
+.zs-buy-btn svg{width:20px;height:20px}
+
+/* ── Checkout Modal (Zona Sur) ── */
+.zs-checkout-modal{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;z-index:3000;padding:20px;
+}
+.zs-checkout-modal.active{display:flex;animation:zsFadeIn 0.4s ease}
+
+@keyframes zsFadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+.zs-checkout-content{
+  background:var(--card-bg);width:100%;max-width:450px;border-radius:var(--radius-lg);
+  padding:40px;position:relative;box-shadow:var(--shadow-xl);text-align:center;
+  max-height:90vh;overflow-y:auto;
+}
+body.dark-theme .zs-checkout-content{
+  background:rgba(20,26,21,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+.zs-checkout-close{
+  position:absolute;top:20px;right:20px;font-size:2rem;color:var(--text-light);
+  cursor:pointer;line-height:1;transition:var(--transition-fast);background:none;border:none;
+}
+.zs-checkout-close:hover{color:var(--text)}
+body.dark-theme .zs-checkout-close{color:var(--text-muted)}
+body.dark-theme .zs-checkout-close:hover{color:var(--text)}
+
+.zs-checkout-content h2{
+  font-family:"Cormorant Garamond",serif;color:var(--primary);margin-bottom:25px;font-size:1.8rem;
+}
+body.dark-theme .zs-checkout-content h2{color:var(--accent)}
+
+.zs-checkout-form{
+  margin-bottom:25px;text-align:left;display:flex;flex-direction:column;gap:15px;
+}
+
+.zs-checkout-field{display:flex;flex-direction:column;gap:6px}
+
+.zs-checkout-field label{
+  font-weight:700;color:var(--primary);font-size:0.75rem;letter-spacing:0.05em;text-transform:uppercase;
+}
+body.dark-theme .zs-checkout-field label{color:var(--primary)}
+
+.zs-checkout-field input,
+.zs-checkout-field select{
+  padding:12px 16px;border:1px solid var(--border);border-radius:var(--radius-sm);
+  width:100%;font-size:0.95rem;font-family:inherit;background:var(--cream-dark);
+  color:var(--text);transition:var(--transition-fast);
+}
+body.dark-theme .zs-checkout-field input,
+body.dark-theme .zs-checkout-field select{
+  background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.12);color:var(--text);
+}
+body.dark-theme .zs-checkout-field input::placeholder{color:rgba(255,255,255,0.35)}
+
+.zs-checkout-field input:focus,
+.zs-checkout-field select:focus{
+  outline:none;border-color:var(--secondary);box-shadow:0 0 0 3px rgba(139,154,70,0.1);
+}
+body.dark-theme .zs-checkout-field input:focus,
+body.dark-theme .zs-checkout-field select:focus{
+  border-color:var(--secondary);box-shadow:0 0 0 3px rgba(139,154,70,0.2);
+}
+
+#zsQty{width:100px}
+
+.zs-total-button{
+  width:100%;background-color:#25d366;color:white;border:none;padding:18px;
+  border-radius:var(--radius-md);font-weight:800;font-size:1.1rem;margin-bottom:15px;
+  cursor:default;box-shadow:0 4px 15px rgba(37,211,102,0.2);font-family:inherit;
+}
+body.dark-theme .zs-total-button{background-color:#1a8a4a;box-shadow:0 4px 15px rgba(26,138,74,0.3)}
+
+.zs-confirm-button{
+  width:100%;background-color:var(--primary);color:white;border:none;padding:18px;
+  border-radius:var(--radius-md);font-weight:700;font-size:0.95rem;cursor:pointer;
+  transition:var(--transition-fast);font-family:inherit;text-transform:uppercase;letter-spacing:0.08em;
+}
+.zs-confirm-button:hover{background-color:var(--primary-light);transform:translateY(-2px)}
+body.dark-theme .zs-confirm-button{background-color:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15)}
+body.dark-theme .zs-confirm-button:hover{background-color:rgba(255,255,255,0.18)}
+
+/* Step 2 */
+.zs-total-highlight{font-family:"Cormorant Garamond",serif;font-size:1.6rem;color:var(--primary);margin-bottom:20px}
+body.dark-theme .zs-total-highlight{color:var(--accent)}
+.zs-payment-instructions{background:rgba(30,58,36,0.04);padding:24px;border-radius:var(--radius-sm);margin-bottom:20px}
+body.dark-theme .zs-payment-instructions{background:rgba(255,255,255,0.04)}
+.zs-alias-card{font-size:1.5rem;font-weight:800;color:#0066ff;margin-top:10px;letter-spacing:0.02em}
+body.dark-theme .zs-alias-card{color:#5599ff}
+.zs-wait-message{color:#2d5a27;font-weight:600;padding:15px;border-radius:var(--radius-sm);background:rgba(45,90,39,0.08);font-size:0.9rem}
+body.dark-theme .zs-wait-message{color:#9dc5a3;background:rgba(157,197,163,0.08)}
+
+/* ── Detail Modal ── */
+.zs-detail-modal{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;z-index:2900;padding:20px;
+}
+.zs-detail-modal.active{display:flex;animation:zsFadeIn 0.4s ease}
+
+.zs-detail-content{
+  background:var(--card-bg);width:100%;max-width:800px;border-radius:var(--radius-lg);
+  padding:40px;position:relative;box-shadow:var(--shadow-xl);
+  max-height:90vh;overflow-y:auto;
+}
+body.dark-theme .zs-detail-content{
+  background:rgba(20,26,21,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+.zs-detail-close{
+  position:absolute;top:20px;right:20px;font-size:2rem;color:var(--text-light);
+  cursor:pointer;line-height:1;transition:var(--transition-fast);background:none;border:none;
+}
+.zs-detail-close:hover{color:var(--text)}
+
+.zs-detail-body{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+@media(max-width:700px){.zs-detail-body{grid-template-columns:1fr}}
+
+.zs-detail-img{
+  width:100%;aspect-ratio:1;object-fit:contain;border-radius:var(--radius-md);
+  background:linear-gradient(180deg,rgba(244,239,233,0.5),rgba(232,226,216,0.5));
+  padding:20px;
+}
+body.dark-theme .zs-detail-img{background:linear-gradient(135deg,rgba(30,42,33,0.5),rgba(27,36,29,0.5))}
+
+.zs-detail-text h2{
+  font-family:"Cormorant Garamond",serif;font-size:1.8rem;color:var(--heading);
+  margin-bottom:16px;line-height:1.2;
+}
+body.dark-theme .zs-detail-text h2{color:var(--accent)}
+
+.zs-detail-text p{color:var(--text-muted);font-size:0.95rem;line-height:1.7;margin-bottom:10px}
+body.dark-theme .zs-detail-text p{color:var(--text-muted)}
+
+/* ── Footer ── */
+.zs-footer{
+  text-align:center;padding:40px 20px;color:var(--text-muted);font-size:0.85rem;
+}
+.zs-footer a{color:var(--primary);text-decoration:none;font-weight:600}
+.zs-footer a:hover{text-decoration:underline}
+
+/* ── Responsive checkout ── */
+@media(max-width:600px){
+  .zs-checkout-content{padding:28px 20px;max-width:100%;border-radius:var(--radius-md)}
+  .zs-checkout-content h2{font-size:1.4rem;margin-bottom:18px}
+  .zs-checkout-modal{padding:12px}
+  #zsQty{width:80px}
+  .zs-total-button{font-size:1rem;padding:15px}
+  .zs-confirm-button{font-size:0.9rem;padding:15px}
+  .zs-alias-card{font-size:1.2rem}
+  .zs-payment-instructions{padding:18px}
+  .zs-info-card{padding:28px 24px}
+}
+</style>
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<!-- Header -->
+<header class="zs-header">
+  <a href="index.html" class="zs-header-logo">Olivery</a>
+  <div class="zs-header-actions">
+    <a href="index.html" class="zs-back-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
+      Volver
+    </a>
+    <button class="theme-button" id="themeToggle">
+      <div class="theme-icon-wrapper">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </div>
+      <span class="theme-text" id="themeText">MODO OSCURO</span>
+    </button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="zs-hero">
+  <div class="container">
+    <div class="zs-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Zona Sur
+    </div>
+    <h1>Aceites Premium con Entrega a Domicilio</h1>
+    <p class="zs-subtitle">
+      Llevamos hasta tu puerta nuestra selección de aceites de oliva virgen extra y acetos balsámicos, sin costo de envío.
+    </p>
+
+    <!-- Delivery Info Card -->
+    <div class="zs-info-card">
+      <h3>Cobertura y Condiciones de Entrega</h3>
+      <p>
+        Si vivís en <span class="zs-barrios">Barrio Parque Vélez Sarsfield</span>, <span class="zs-barrios">Colinas de Vélez Sarsfield</span>, <span class="zs-barrios">Residencial Vélez Sarsfield</span> o <span class="zs-barrios">Altos de Vélez Sarsfield</span>, podés comprar aceites de oliva premium con entrega a domicilio sin cargo.
+      </p>
+      <div class="zs-horarios">
+        <p>
+          <strong>Horarios de entrega</strong><br>
+          Lunes a viernes de 15:00 hs a 19:00 hs<br>
+          Sábados de 10:00 hs a 13:00 hs
+        </p>
+        <p style="margin-top:12px">
+          Los pedidos recibidos hasta las 14:00 hs se despachan en el día y se entregan hasta las 19:00 hs.
+          Los pedidos posteriores a ese horario se despachan al día siguiente, siempre con entrega por la tarde.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Products Grid -->
+<section class="zs-products">
+  <div class="container">
+    <h2 class="zs-section-title">Nuestros Productos</h2>
+    <div class="zs-grid" id="zsGrid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- Detail Modal -->
+<div class="zs-detail-modal" id="zsDetailModal">
+  <div class="zs-detail-content">
+    <button class="zs-detail-close" id="zsDetailClose" aria-label="Cerrar">&times;</button>
+    <div class="zs-detail-body">
+      <img class="zs-detail-img" id="zsDetailImg" src="" alt=""/>
+      <div class="zs-detail-text">
+        <h2 id="zsDetailTitle"></h2>
+        <div id="zsDetailDesc"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Checkout Modal (Zona Sur) -->
+<div class="zs-checkout-modal" id="zsCheckoutModal">
+  <div class="zs-checkout-content">
+    <button class="zs-checkout-close" id="zsCheckoutClose" aria-label="Cerrar">&times;</button>
+    <div id="zsStep1">
+      <h2 id="zsCheckoutTitle">Producto</h2>
+      <div class="zs-checkout-form">
+        <div class="zs-checkout-field">
+          <label for="zsQty">Cantidad:</label>
+          <input type="number" id="zsQty" value="1" min="1">
+        </div>
+        <div class="zs-checkout-field">
+          <label for="zsPhone">Celular:</label>
+          <input type="tel" id="zsPhone" placeholder="Tu número de WhatsApp">
+        </div>
+        <div class="zs-checkout-field">
+          <label for="zsName">Cliente:</label>
+          <input type="text" id="zsName" placeholder="Nombre y Apellido">
+        </div>
+        <div class="zs-checkout-field">
+          <label for="zsAddress">Dirección:</label>
+          <input type="text" id="zsAddress" placeholder="Calle, altura, barrio y referencia">
+        </div>
+        <div class="zs-checkout-field">
+          <label for="zsDay">Día de entrega:</label>
+          <select id="zsDay">
+            <option value="" disabled selected>Seleccioná un día</option>
+            <option value="Lunes">Lunes</option>
+            <option value="Martes">Martes</option>
+            <option value="Miércoles">Miércoles</option>
+            <option value="Jueves">Jueves</option>
+            <option value="Viernes">Viernes</option>
+            <option value="Sábado">Sábado</option>
+          </select>
+        </div>
+      </div>
+      <button class="zs-total-button" id="zsTotalPrice">PAGAR TOTAL: $ 0</button>
+      <button class="zs-confirm-button" id="zsConfirmBtn">CONFIRMAR</button>
+    </div>
+    <div id="zsStep2" style="display:none">
+      <h2>Resumen de Compra</h2>
+      <p class="zs-total-highlight">Monto Total: <span id="zsConfirmTotal"></span></p>
+      <div class="zs-payment-instructions">
+        <p>Transferí el monto a la cuenta de Mercado Pago:</p>
+        <p class="zs-alias-card">olivery.cba</p>
+      </div>
+      <p class="zs-wait-message">Aguardá un momento que se acredite el pago y te confirmo la transacción</p>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="zs-footer">
+  <p>&copy; 2026 <a href="index.html">Olivery</a> Boutique de Aceites. Todos los derechos reservados.</p>
+</div>
+
+<script>
+// ── Products Data (shared with main site) ──
+const productsData = {
+  1:{title:"Aceite Tupelí Extra Virgen x 250 ml",image:"tupeli-250.png",price:8900,description:["Producido por GAMA S.R.L., empresa familiar fundada en 1949 por Julio Marún en San Juan, Argentina.","Elaborado con aceitunas frescas seleccionadas de la ladera sureste del Cerro Villicum, en el corazón del Valle del Tulum.","Este Aceite de Oliva Extra Virgen premium destaca por su equilibrio perfecto entre notas frutales y un toque herbáceo.","Presenta aromas a aceituna madura con un perfil sensorial armonioso que refleja la herencia de más de 70 años.","Su sabor posee un amargor y picor ligeros en grado medio, característicos de frutos procesados en su punto óptimo.","Garantiza una bajísima acidez y una alta concentración de polifenoles naturales gracias a su cuidadosa extracción.","Es el compañero ideal para ensaladas mediterráneas, quesos de pasta dura y para finalizar platos de carnes o pastas.","La pureza de Tupelí es el resultado de un compromiso inquebrantable con la calidad y la trazabilidad en origen.","Cada botella transporta la esencia del sol sanjuanino y la tradición de una de las marcas más emblemáticas de la región.","Su Establecimiento cuenta con el Museo Don Julio, donde se preserva la historia viva de la olivicultura nacional."]},
+  3:{title:"Aceite Oliovita Mediterráneo Virgen Extra x 250 ml",image:"oliovita-mediterraneo.png",price:6700,description:["Producido por Solfrut en los valles de San Juan, líder en producción olivícola de alta gama en Argentina.","El blend Mediterráneo es una creación exclusiva inspirada en el perfil sensorial de los aceites europeos clásicos.","Se elabora a partir de una cuidosa selección de varietales que garantizan un sabor equilibrado y consistente.","Destaca por su intensidad media, con fragancias que evocan el pasto recién cortado y sutiles notas de frutos maduros.","En boca, logra una armonía perfecta entre una nota dulce inicial y un picor suave y persistente al final.","Es un Aceite de Oliva Virgen Extra (AOVE) reconocido por su gran versatilidad en todo tipo de preparaciones.","Ideal para realzar ensaladas, pastas mediterráneas, vegetales asados o simplemente para disfrutar con pan artesanal.","La extracción se realiza por procesos mecánicos de última generación que conservan intactos sus polifenoles.","Representa el compromiso de Solfrut con la excelencia, avalado por estándares internacionales de calidad y pureza.","Su presentación de 250 ml es ideal para asegurar la frescura del producto en el uso cotidiano de cada mesa."]},
+  4:{title:"Aceite Oliovita Clásico Virgen Extra x 250 ml",image:"oliovita-clasico.png",price:7300,description:["El Oliovita Clásico es el estándar de excelencia de Solfrut, producido en la provincia de San Juan, Argentina.","Es un Aceite de Oliva Virgen Extra (AOVE) de tipo blend, diseñado para ofrecer un perfil de sabor constante y armonioso.","Se caracteriza por su extrema suavidad y equilibrio, siendo una de las etiquetas más vendidas y respetadas del país.","Posee un aroma frutado tenue con sutiles notas de olivas frescas, capturando la esencia de los valles precordilleranos.","Su elaboración en la planta más moderna de América Latina asegura una bajísima acidez y máxima pureza.","Es una fuente natural de vitaminas y antioxidantes, libre de grasas trans y procesos químicos refinados.","Por su versatilidad, es el aliado ideal para el consumo diario en ensaladas, pastas, carnes blancas y salsas caseras.","Su sabor noble permite que sea utilizado tanto para aderezar en crudo como para realizar cocciones ligeras.","Cada botella de 250 ml en envase PET garantiza practicidad y protección de sus cualidades nutritivas fundamentales.","Elegir Oliovita Clásico es llevar a la mesa la confianza de un líder regional que prioriza el bienestar y la salud."]},
+  5:{title:"Aceite Laur Virgen Extra x 250 ml",image:"laur.png",price:10900,description:["Laur es la olivícola número 1 del mundo según el EVOO World Ranking por tres años consecutivos.","Este Virgen Extra Clásico se produce en Maipú, Mendoza, continuando una tradición iniciada en 1889.","Se elabora exclusivamente con aceitunas de la variedad Arbequina seleccionadas en su punto óptimo.","Posee un aroma frutado verde intenso con notas a hierba recién cortada y un cuerpo estructurado.","En boca presenta un amargor suave y el picor característico de los aceites ricos en antioxidantes naturales.","Es un aceite de altísima gama, premiado internacionalmente por su pureza y perfil sensorial superior.","Ideal para maridar con carnes rojas, pastas con salsas potentes o simplemente para degustar en crudo.","El envase de vidrio de 250 ml protege la integridad del aceite de la luz y agentes externos.","Incluye un pico dosificador antigoteo de precisión para un servicio elegante y sin desperdicios.","Llevar un Laur a tu mesa es disfrutar del máximo exponente de la industria olivícola argentina global."]},
+  6:{title:"Aceite Zuelo Virgen Extra Original x 250 ml",image:"zuelo-original.png",price:11700,description:["Zuelo es el proyecto olivícola de la prestigiosa Familia Zuccardi, con origen en Maipú, Mendoza.","La versión Original es un blend equilibrado de variedades seleccionadas, como Arbequina, Picual y Coratina.","Se caracteriza por su frescura excepcional, lograda mediante un proceso de extracción inmediata tras la cosecha.","En nariz, destacan notas herbáceas intensas y una fragancia muy particular a banana verde y pasto fresco.","Su perfil de sabor es frutado y sabroso, con un amargor medio y un regusto picante sumamente agradable.","Es un aceite de gran personalidad que refleja fielmente el terruño mendocino y la pasión de la familia.","Ideal para aderezar ensaladas de hojas amargas, pastas con vegetales o para finalizar carnes a la parrilla.","El envase de vidrio de 250 ml preserva la complejidad aromática y protege el aceite de la oxidación.","Viene equipado con un pico dosificador de alta precisión para un servicio grueso y un control total del goteo.","Zuelo Original es garantía de un aceite virgen extra de clase mundial, nacido de la excelencia vitivinícola."]},
+  7:{title:"Aceto Balsámico Oliovita Reducción x 250 ml",image:"oliovita.png",price:4800,description:["El Aceto Balsámico Oliovita Reducción es un aderezo premium elaborado por Solfrut en San Juan.","Se caracteriza por su textura espesa y untuosa, lograda mediante un proceso de reducción lenta.","Ofrece un equilibrio perfecto entre la acidez del vinagre de vino y la dulzura del mosto de uva concentrado.","Su sabor es intenso y frutado, con el toque clásico de los acetos de estilo europeo más prestigiosos.","Es el ingrediente ideal para decorar platos gourmet y aportar un contraste de sabor único y sofisticado.","Excelente para maridar con quesos duros, carnes rojas a la parrilla, vegetales asados o incluso postres.","Su consistencia cremosa permite realizar dibujos y terminaciones profesionales en cada una de tus recetas.","El envase de vidrio de 250 ml asegura la conservación óptima de sus propiedades organolépticas superiores.","Cuenta con un pico dosificador de precisión que facilita un servicio limpio y un control exacto del goteo.","Una pieza indispensable en la cocina de quienes buscan elevar el nivel visual y gustativo de sus platos."]},
+  8:{title:"Aceto Balsámico Clásico Casalta x 250 ml",image:"casalta.png",price:4000,description:["Casalta es la marca líder de Porta Hermanos, empresa cordobesa con más de 140 años de historia.","Este Aceto Balsámico Clásico destaca por su acidez intensa y equilibrada, al estilo de Modena.","Se elabora mediante una receta tradicional que combina vinagres seleccionados y mosto de uva.","En nariz, ofrece notas frutales dulces que delatan la calidad de su materia prima de origen.","Su sabor envuelve el paladar con una mezcla armoniosa de notas agrias y un final dulce persistente.","Es el aliado perfecto para realzar el sabor de ensaladas diarias, vegetales asados y marinados.","Su versatilidad permite utilizarlo también en recetas de carnes blancas e incluso en coctelería.","La presentación en envase PET de 250 ml garantiza una larga vida útil y frescura del producto.","Incluye el práctico pico dosificador que permite un servicio preciso y evita derrames accidentales.","Un clásico indispensable en los hogares argentinos que valoran la tradición industrial y el buen sabor."]},
+  9:{title:"Aceite Familia Zuccardi Coratina x 250 ml",image:"coratina_final.png",price:11400,description:["El Aceite Coratina es el varietal más intenso de la línea Aceites Varietales de la Familia Zuccardi, elaborado en Maipú, Mendoza.","La variedad Coratina, originaria de la región italiana de Puglia, alcanza en el terruño mendocino su máxima expresión aromática.","En nariz, presenta un aroma complejo e inconfundible: notas a tallo verde, nuez fresca y cáscara de banana.","Pueden aparecer también matices tostados y un sugestivo toque a café que enriquecen su perfil sensorial único.","En boca, exhibe una destacada y persistente intensidad de amargos, rasgo característico de las aceitunas Coratina en su punto óptimo.","Su marcado y prolongado picor al final del paladar es señal inconfundible de su altísima concentración de polifenoles naturales.","Es uno de los aceites con mayor estabilidad oxidativa del mercado, lo que garantiza una vida útil y frescura excepcionales.","Ideal para platos de carácter: pastas con ragú, carnes rojas a la parrilla, bruschetta, quesos curados y guisos.","El envase de vidrio de 250 ml con pico dosificador antigoteo preserva intacta su complejidad aromática y protege el aceite de la luz.","Elegir el Coratina Zuccardi es apostar por un AOVE de clase mundial, con carácter propio y una historia familiar centenaria."]},
+  10:{title:"Aceite Familia Zuccardi Genovesa x 250 ml",image:"genovesa_final.png",price:11400,description:["El Aceite Genovesa es el varietal más delicado y complejo de la línea Aceites Varietales de la Familia Zuccardi, elaborado en Mendoza.","La variedad Genovesa es una cultivar de origen italiano adaptada con maestría al excepcional terruño de los Valles Mendocinos.","En nariz, despliega un frutado de intensidad media, elegante y refinado, con notas limpias y muy características.","Su aroma principal evoca a hierbas frescas y manzana verde, con la frescura propia de aceitunas cosechadas en su punto ideal.","En ocasiones, el perfil aromático se enriquece con notas más maduras, como suaves toques de frutos rojos que lo hacen único.","En boca, es un aceite profundamente equilibrado, que evita extremos de amargor o picor para priorizar la armonía de sabores.","Su frutado resulta complejo y persistente en el paladar, revelando capas de sabor que se desarrollan lentamente con cada sorbo.","Es la elección perfecta para quienes buscan un AOVE fino y versátil: ensaladas de hojas verdes, pescados y carpaccios.","El envase de vidrio de 250 ml con pico dosificador antigoteo garantiza la protección de su delicado perfil aromático.","Elegir el Genovesa Zuccardi es incorporar a tu mesa la fineza de un varietal único, con la firma de una familia centenaria."]},
+  11:{title:"Aceite Familia Zuccardi Picual x 250 ml",image:"picual_final.png",price:11400,description:["El Aceite Picual es el varietal más aromático y versátil de la línea Aceites Varietales de la Familia Zuccardi, elaborado en Mendoza.","La variedad Picual, la más cultivada del mundo y reina indiscutida de la olivicultura española, encuentra en Mendoza su mejor expresión.","Su perfil aromático varía según el punto de cosecha, ofreciendo notas herbáceas, hoja de tomate y manzana fresca cuando es temprana.","En cosechas más anticipadas, aparecen elegantes notas a higuera que aportan una complejidad vegetal y fresca muy particular.","En puntos de madurez más tardíos, el perfil evoluciona hacia toques de hoja de ruda, agregando profundidad y carácter al aceite.","En boca, su frutado es normalmente intenso y sabroso, con un amargor y picante medios que garantizan presencia sin agresividad.","Es considerado uno de los aceites con mayor estabilidad y resistencia a la oxidación, ideal para la cocina y el uso en crudo.","Su perfil intenso lo convierte en el acompañante ideal de guisos, asados, tostadas con tomate y aliños de ensaladas.","El envase de vidrio de 250 ml con pico dosificador antigoteo preserve intacta su riqueza aromática y protege el aceite de la luz.","Elegir el Picual Zuccardi es llevar a tu mesa la variedad más conocida del mundo con el sello de calidad de una familia centenaria."]},
+  12:{title:"Aceite Zuelo Virgen Extra Blend Original x 500 ml",image:"zuelo-500.png",price:17600,description:["Zuelo es el prestigioso proyecto olivícola de la Familia Zuccardi, nacido en Maipú, Mendoza.","La versión Original es un blend equilibrado de variedades meticulosamente seleccionadas, entre ellas Arbequina, Picual y Coratina.","Se distingue por una frescura inigualable, fruto de un proceso de extracción inmediata posterior a la recolección.","En nariz, ofrece notas herbáceas intensas, acompañadas de fragancias muy singulares a banana verde y pasto recién cortado.","Su perfil de sabor es rico y frutado, presentando un amargor medio sutil y un regusto picante que resulta sumamente agradable.","Se trata de un aceite con gran carácter, que refleja la autenticidad del terruño mendocino y la pasión constante de la familia.","Resulta el acompañante ideal para aderezar generosas ensaladas, pastas con vegetales o para potenciar carnes asadas.","Su presentación de 500 ml es perfecta para quienes buscan el mayor rendimiento sin sacrificar calidad.","El envase de vidrio cuenta con un práctico pico dosificador que brinda precisión y comodidad al momento de servir.","Zuelo Original de 500 ml asegura un aceite virgen extra de nivel superior para el uso cotidiano en los mejores platos."]},
+  13:{title:"Aceite Hilal Virgen Extra Blend Doña Sofía x 500 ml",image:"hilal.png",price:12900,description:['El aceite de oliva virgen extra Hilal "Doña Sofía" Blend es un producto artesanal y agroecológico elaborado en Argentina.',"Producido mediante procesos 100% naturales que preservan intacto su alto valor nutricional y propiedades benéficas.","Resulta de una mezcla equilibrada de cuatro distinguidas variedades de aceitunas: Arbequina, Arauco, Frantoio y Manzanilla.","Dentro de su perfil de sabor, se destaca especialmente por su suavidad inigualable al paladar.","Logra una combinación perfecta donde el picor y el amargor son sutiles, realzando el sabor de las comidas sin invadirlas.","La extracción se obtiene mediante primera presión en frío, lo que garantiza la pureza y la máxima calidad del aceite.",'La cosecha se realiza de forma manual utilizando el tradicional método de "ordeño", cuidando el fruto desde el origen.',"Su proceso de elaboración cuenta con molienda fina en molino de piedra y un cuidadoso decantado completamente natural.","No recibe agentes químicos ni tratamientos industriales agresivos que puedan alterar o comprometer su composición original.","Es una opción excepcional para quienes buscan un aceite 100% natural, ideal para cuidar la salud y disfrutar del mejor sabor."]},
+  14:{title:"Aceite Tupelí Extra Virgen x 500 ml",image:"tupeli-500.png",price:14700,description:["Producido por GAMA S.R.L., empresa familiar fundada en 1949 por Julio Marún en San Juan, Argentina.","Elaborado con aceitunas frescas seleccionadas de la ladera sureste del Cerro Villicum, en el corazón del Valle del Tulum.","Este Aceite de Oliva Extra Virgen premium destaca por su equilibrio perfecto entre notas frutales y un toque herbáceo.","Presenta aromas a aceituna madura con un perfil sensorial armonioso que refleja la herencia de más de 70 años.","Su sabor posee un amargor y picor ligeros en grado medio, característicos de frutos procesados en su punto óptimo.","Garantiza una bajísima acidez y una alta concentración de polifenoles naturales gracias a su cuidadosa extracción.","Es el compañero ideal para ensaladas mediterráneas, quesos de pasta dura y para finalizar platos de carnes o pastas.","La pureza de Tupelí es el resultado de un compromiso inquebrantable con la calidad y la trazabilidad en origen.","Cada botella de 500 ml transporta la esencia del sol sanjuanino y la tradición de una de las marcas más emblemáticas de la región.","Su Establecimiento cuenta con el Museo Don Julio, donde se preserva la historia viva de la olivicultura nacional."]},
+  15:{title:"Aceite Hilal Virgen Extra Blend Doña Sofía x 500 ml",image:"hilal-55-v.png",price:15200,description:['El aceite de oliva virgen extra Hilal "Doña Sofía" Blend es un producto artesanal y agroecológico elaborado en Argentina.',"Producido mediante procesos 100% naturales que preservan intacto su alto valor nutricional y propiedades benéficas.","Resulta de una mezcla equilibrada de cuatro distinguidas variedades de aceitunas: Arbequina, Arauco, Frantoio y Manzanilla.","Dentro de su perfil de sabor, se destaca especialmente por su suavidad inigualable al paladar.","Logra una combinación perfecta donde el picor y el amargor son sutiles, realzando el sabor de las comidas sin invadirlas.","La extracción se obtiene mediante primera presión en frío, lo que garantiza la pureza y la máxima calidad del aceite.",'La cosecha se realiza de forma manual utilizando el tradicional método de "ordeño", cuidando el fruto desde el origen.',"Su proceso de elaboración cuenta con molienda fina en molino de piedra y un cuidadoso decantado completamente natural.","Esta presentación en un elegante envase de vidrio con pico dosificador protege y facilita el uso de tu aceite.","Es una opción excepcional para quienes buscan un aceite 100% natural, ideal para cuidar la salud y disfrutar del mejor sabor."]},
+  16:{title:"Aceite Hilal Virgen Extra Blend Doña Sofía x 1000 ml",image:"hilal-1L.png",price:23900,description:['El aceite de oliva virgen extra Hilal "Doña Sofía" Blend es un producto artesanal y agroecológico elaborado en Argentina.',"Producido mediante procesos 100% naturales que preservan intacto su alto valor nutricional y propiedades benéficas.","Resulta de una mezcla equilibrada de cuatro distinguidas variedades de aceitunas: Arbequina, Arauco, Frantoio y Manzanilla.","Dentro de su perfil de sabor, se destaca especialmente por su suavidad inigualable al paladar.","Logra una combinación perfecta donde el picor y el amargor son sutiles, realzando el sabor de las comidas sin invadirlas.","La extracción se obtiene mediante primera presión en frío, lo que garantiza la pureza y la máxima calidad del aceite.",'La cosecha se realiza de forma manual utilizando el tradicional método de "ordeño", cuidando el fruto desde el origen.',"Su proceso de elaboración cuenta con molienda fina en molino de piedra y un cuidadoso decantado completamente natural.","La presentación de 1000 ml en envase PET de alta densidad es ideal para el uso diario y la mejor relación precio-rendimiento.","Es una opción excepcional para quienes buscan un aceite 100% natural, ideal para cuidar la salud y disfrutar del mejor sabor."]},
+  17:{title:"Aceite Familia Zuccardi Genovesa x 500 ml",image:"genovesa-500.png",price:19900,description:["El Aceite Genovesa de la Familia Zuccardi en su presentación de 500 ml para mayor rendimiento.","La variedad Genovesa es una cultivar de origen italiano adaptada con maestría al terruño mendocino.","En nariz, despliega un frutado de intensidad media, elegante y refinado, con notas limpias características.","Su aroma principal evoca a hierbas frescas y manzana verde, con la frescura de aceitunas en punto ideal.","Perfil profundamente equilibrado: amargo ligero, picante suave, priorizando la armonía de sabores.","Su frutado resulta complejo y persistente en el paladar, revelando capas de sabor que se desarrollan.","Es la elección perfecta para ensaladas de hojas verdes, pescados y carpaccios.","La presentación 500 ml en vidrio oscuro con pico dosificador garantiza mayor rendimiento y frescura.","Ideal para hogares que consumen aceite de oliva de alta calidad a diario.","Elegir el Genovesa Zuccardi es incorporar a tu mesa la fineza de un varietal único con firma centenaria."]},
+  18:{title:"Aceite de oliva Virgen Extra El Mistol Premium x 500 ml",image:"Mistol.png",price:20300,description:["Origen: Provincia de San Juan, Argentina, elaborado por Agropecuaria El Mistol.","AOVE premium de acidez muy baja (menor a 0,25 %), indicador de máxima calidad.","Vida útil estimada de 2 años con conservación correcta, protegido en vidrio.","Blend de Arauco, Arbequina y Picual; cada variedad aporta equilibrio y estructura.","La Arbequina suma suavidad y frescura, la Picual estabilidad y cuerpo.","Perfil frutado verde intenso con aromas a aceituna verde, clorofila y hierbas.","Aparecen notas de rúcula, espárrago y almendra verde con pimienta blanca y negra.","En boca: amargo medio, picante suave a moderado y retrogusto vegetal persistente.","Cosecha temprana, molienda el mismo día y extracción en frío sin agua ni calor.","Ideal para ensaladas, pescados, verduras y para terminar platos; incluye pico dosificador."]},
+};
+
+// ── Render Product Cards ──
+const grid = document.getElementById('zsGrid');
+const productOrder = [1,14,3,4,5,6,12,9,10,17,11,13,15,16,18,7,8];
+
+productOrder.forEach(id => {
+  const p = productsData[id];
+  if (!p) return;
+  const card = document.createElement('div');
+  card.className = 'zs-card';
+  card.setAttribute('data-product', id);
+  card.innerHTML = `
+    <div class="zs-card-img-wrap">
+      <img class="zs-card-img" src="${p.image}" alt="${p.title}" loading="lazy"/>
+      <div class="zs-card-overlay"><span class="zs-view-more">Ver Detalle</span></div>
+    </div>
+    <div class="zs-card-info">
+      <h3>${p.title}</h3>
+      <div class="zs-card-price">$ ${p.price.toLocaleString('es-AR')}</div>
+      <button class="zs-buy-btn" data-buy="${id}" type="button">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        COMPRAR
+      </button>
+    </div>`;
+  grid.appendChild(card);
+});
+
+// ── Detail Modal ──
+const detailModal = document.getElementById('zsDetailModal');
+const detailClose = document.getElementById('zsDetailClose');
+
+function openDetail(id) {
+  const p = productsData[id];
+  if (!p) return;
+  document.getElementById('zsDetailTitle').textContent = p.title;
+  document.getElementById('zsDetailImg').src = p.image;
+  document.getElementById('zsDetailImg').alt = p.title;
+  const desc = document.getElementById('zsDetailDesc');
+  desc.innerHTML = '';
+  p.description.forEach(line => {
+    const el = document.createElement('p');
+    el.textContent = line;
+    desc.appendChild(el);
+  });
+  detailModal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDetail() {
+  detailModal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+detailClose.addEventListener('click', closeDetail);
+detailModal.addEventListener('click', e => { if (e.target === detailModal) closeDetail(); });
+
+// ── Checkout Modal (Zona Sur) ──
+const checkoutModal = document.getElementById('zsCheckoutModal');
+const checkoutClose = document.getElementById('zsCheckoutClose');
+let currentProduct = null;
+
+function openZsCheckout(id) {
+  const p = productsData[id];
+  if (!p) return;
+  currentProduct = { ...p, id };
+
+  document.getElementById('zsCheckoutTitle').textContent = p.title;
+  document.getElementById('zsQty').value = 1;
+  document.getElementById('zsPhone').value = '';
+  document.getElementById('zsName').value = '';
+  document.getElementById('zsAddress').value = '';
+  document.getElementById('zsDay').selectedIndex = 0;
+  document.getElementById('zsStep1').style.display = 'block';
+  document.getElementById('zsStep2').style.display = 'none';
+  updateZsTotal();
+
+  checkoutModal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeZsCheckout() {
+  checkoutModal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function updateZsTotal() {
+  if (!currentProduct) return;
+  const qty = parseInt(document.getElementById('zsQty').value) || 1;
+  const total = currentProduct.price * qty;
+  document.getElementById('zsTotalPrice').textContent = `PAGAR TOTAL: $ ${total.toLocaleString('es-AR')}`;
+}
+
+function confirmZsPurchase() {
+  const qty = parseInt(document.getElementById('zsQty').value) || 1;
+  const phone = document.getElementById('zsPhone').value.trim();
+  const name = document.getElementById('zsName').value.trim();
+  const address = document.getElementById('zsAddress').value.trim();
+  const day = document.getElementById('zsDay').value;
+
+  const missing = [];
+  if (!name) missing.push('Nombre');
+  if (!phone) missing.push('Celular');
+  if (!address) missing.push('Dirección');
+  if (!day) missing.push('Día de entrega');
+  if (missing.length) {
+    alert('Por favor completá: ' + missing.join(', '));
+    return;
+  }
+
+  const total = currentProduct.price * qty;
+
+  // Show step 2
+  document.getElementById('zsStep1').style.display = 'none';
+  document.getElementById('zsStep2').style.display = 'block';
+  document.getElementById('zsConfirmTotal').textContent = `$ ${total.toLocaleString('es-AR')}`;
+
+  // WhatsApp message — Zona Sur number: 3517637431
+  const msg =
+    `🛍️ *PEDIDO ZONA SUR — OLIVERY*%0A%0A` +
+    `*Producto:* ${currentProduct.title}%0A` +
+    `*Cantidad:* ${qty}%0A` +
+    `*Total:* $${total.toLocaleString('es-AR')}%0A%0A` +
+    `🔹 *Alias Mercado Pago:* olivery.cba%0A%0A` +
+    `👤 *Cliente:* ${name}%0A` +
+    `📱 *Celular:* ${phone}%0A` +
+    `📍 *Dirección:* ${address}%0A` +
+    `🚚 *Día de Entrega:* ${day}%0A%0A` +
+    `_A la espera de confirmación de transferencia._`;
+
+  const zsNumber = '3517637431';
+  const waUrl = `https://wa.me/${zsNumber}?text=${msg}`;
+  window.open(waUrl, '_blank');
+
+  // Email
+  const emailSubject = `PEDIDO ZONA SUR DE ${name.toUpperCase()}`;
+  const emailBody =
+    `Resumen del Pedido (Zona Sur):\n\n` +
+    `Producto: ${currentProduct.title}\n` +
+    `Cantidad: ${qty}\n` +
+    `Monto a Pagar: $${total.toLocaleString('es-AR')}\n\n` +
+    `📌 Alias Mercado Pago: olivery.cba\n\n` +
+    `Cliente: ${name}\n` +
+    `Celular: ${phone}\n` +
+    `Dirección: ${address}\n` +
+    `Día de Entrega: ${day}`;
+  const mailUrl = `mailto:oliveryweb@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+  setTimeout(() => { window.location.href = mailUrl; }, 800);
+}
+
+checkoutClose.addEventListener('click', closeZsCheckout);
+checkoutModal.addEventListener('click', e => { if (e.target === checkoutModal) closeZsCheckout(); });
+
+document.getElementById('zsConfirmBtn').addEventListener('click', confirmZsPurchase);
+
+const zsQtyInput = document.getElementById('zsQty');
+zsQtyInput.addEventListener('input', updateZsTotal);
+zsQtyInput.addEventListener('change', () => {
+  let v = parseInt(zsQtyInput.value);
+  if (isNaN(v) || v < 1) zsQtyInput.value = 1;
+  updateZsTotal();
+});
+
+// ── Card Click Delegation ──
+grid.addEventListener('click', e => {
+  const buyBtn = e.target.closest('.zs-buy-btn');
+  if (buyBtn) {
+    e.stopPropagation();
+    openZsCheckout(buyBtn.getAttribute('data-buy'));
+    return;
+  }
+  const card = e.target.closest('.zs-card');
+  if (card) {
+    openDetail(card.getAttribute('data-product'));
+  }
+});
+
+// ── Escape key ──
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeDetail();
+    closeZsCheckout();
+  }
+});
+
+// ── Theme Toggle ──
+const themeToggle = document.getElementById('themeToggle');
+const themeText = document.getElementById('themeText');
+
+function updateThemeText(isDark) {
+  themeText.textContent = isDark ? 'MODO CLARO' : 'MODO OSCURO';
+}
+
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+  const isDark = savedTheme === 'dark';
+  document.body.classList.toggle('dark-theme', isDark);
+  updateThemeText(isDark);
+}
+
+themeToggle.addEventListener('click', () => {
+  const isDark = document.body.classList.toggle('dark-theme');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  updateThemeText(isDark);
+});
+</script>
+
+</body>
+</html>
