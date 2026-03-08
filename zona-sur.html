@@ -186,7 +186,71 @@ body.dark-theme .zs-horarios{background:rgba(255,255,255,0.04)}
 .zs-section-title{
   font-family:"Cormorant Garamond",serif;
   font-size:clamp(1.8rem,4vw,2.6rem);
-  color:var(--heading);text-align:center;margin-bottom:48px;font-weight:700;letter-spacing:-0.02em;
+  color:var(--heading);text-align:center;margin-bottom:16px;font-weight:700;letter-spacing:-0.02em;
+}
+
+.zs-products-subtitle{
+  text-align:center;color:var(--text-muted);font-size:clamp(0.9rem,1.2vw,1rem);
+  margin-bottom:40px;line-height:1.6;
+}
+
+/* ── Cartel IMPORTANTE ── */
+.zs-importante{
+  max-width:820px;margin:0 auto 48px;
+  display:flex;align-items:flex-start;gap:14px;
+  padding:24px 30px;
+  background:var(--card-bg);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(30,58,36,0.12);
+  border-radius:var(--radius-md);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 2px 4px rgba(255,255,255,0.7),
+    inset 0 -2px 6px rgba(30,58,36,0.06);
+  position:relative;
+  overflow:hidden;
+}
+body.dark-theme .zs-importante{
+  border-color:rgba(255,255,255,0.1);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 1px 2px rgba(255,255,255,0.06),
+    inset 0 -2px 6px rgba(0,0,0,0.3);
+}
+
+.zs-importante::before{
+  content:"";position:absolute;top:0;left:0;width:4px;height:100%;
+  background:linear-gradient(180deg,var(--accent),var(--secondary));
+  border-radius:4px 0 0 4px;
+}
+
+.zs-importante p{
+  color:var(--text);font-size:0.95rem;line-height:1.75;
+}
+.zs-importante p strong{
+  color:var(--primary);
+}
+body.dark-theme .zs-importante p{color:var(--text)}
+body.dark-theme .zs-importante p strong{color:var(--accent)}
+
+.zs-importante-finger{
+  font-size:1.6rem;flex-shrink:0;margin-top:2px;
+  display:inline-block;
+  animation:zsFingerPoint 1.2s ease-in-out infinite;
+  transform-origin:center center;
+}
+
+@keyframes zsFingerPoint{
+  0%,100%{transform:translateX(0)}
+  30%{transform:translateX(6px)}
+  60%{transform:translateX(0)}
+  80%{transform:translateX(4px)}
+}
+
+@media(max-width:600px){
+  .zs-importante{padding:20px;gap:10px;flex-direction:column;align-items:center;text-align:center}
+  .zs-importante-finger{font-size:1.4rem}
+  .zs-importante p{font-size:0.88rem}
 }
 
 .zs-grid{
@@ -503,7 +567,15 @@ body.dark-theme .zs-detail-text p{color:var(--text-muted)}
 <!-- Products Grid -->
 <section class="zs-products">
   <div class="container">
-    <h2 class="zs-section-title">Nuestros Productos</h2>
+    <h2 class="zs-section-title">Productos Disponibles</h2>
+    <p class="zs-products-subtitle">Elegí tu aceite y completá tu compra con entrega sin cargo en Zona Sur.</p>
+
+    <!-- Cartel IMPORTANTE -->
+    <div class="zs-importante">
+      <span class="zs-importante-finger">👉</span>
+      <p><strong>IMPORTANTE:</strong> El pago de tu <strong>PRIMERA COMPRA</strong> debe efectuarse por acá para que quedes verificado y registrado como cliente. A partir de esto, podés hacer tu encargo por este medio y abonarlo contrarreembolso en tu domicilio.</p>
+    </div>
+
     <div class="zs-grid" id="zsGrid">
       <!-- Rendered by JS -->
     </div>
